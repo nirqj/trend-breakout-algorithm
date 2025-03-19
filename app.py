@@ -27,12 +27,6 @@ end_date = st.sidebar.date_input("End Date", datetime.now())
 
 # User input for timeframe
 timeframe_options = {
-    "1 Minute": "1m",
-    "5 Minutes": "5m",
-    "15 Minutes": "15m",
-    "30 Minutes": "30m",
-    "1 Hour": "1h",
-    "4 Hours": "4h",
     "1 Day": "1d",
     "1 Week": "1wk",
     "1 Month": "1mo"
@@ -127,9 +121,9 @@ if st.button("Load Data and Run Backtest"):
             # Calculate metrics
             total_trades = len(trades_df)
             if total_trades > 0:
-                winning_trades = len(trades_df[trades_df['profit_loss_amount'] > 0])
+                winning_trades = len(trades_df[trades_df['Profit/Loss Amount'] > 0])
                 win_rate = (winning_trades / total_trades) * 100
-                total_profit = trades_df['profit_loss_amount'].sum()
+                total_profit = trades_df['Profit/Loss Amount'].sum()
                 profit_percentage = ((final_balance - initial_balance) / initial_balance) * 100
                 
                 # Fix: Convert numeric values to strings for Streamlit metrics
@@ -152,11 +146,11 @@ if st.button("Load Data and Run Backtest"):
                 
                 # Format the trades dataframe for display
                 display_df = trades_df.copy()
-                display_df['entry_date'] = display_df['entry_date'].dt.strftime('%Y-%m-%d %H:%M')
-                display_df['exit_date'] = display_df['exit_date'].dt.strftime('%Y-%m-%d %H:%M')
-                display_df['profit_loss_percentage'] = display_df['profit_loss_percentage'].round(2).astype(str) + '%'
-                display_df['profit_loss_amount'] = '$' + display_df['profit_loss_amount'].round(2).astype(str)
-                display_df['balance'] = '$' + display_df['balance'].round(2).astype(str)
+                display_df['entry_date'] = display_df['Entry Date'].dt.strftime('%Y-%m-%d %H:%M')
+                display_df['exit_date'] = display_df['Exit Date'].dt.strftime('%Y-%m-%d %H:%M')
+                display_df['profit_loss_percentage'] = display_df['Profit/Loss Percentage'].round(2).astype(str) + '%'
+                display_df['profit_loss_amount'] = '$' + display_df['Profit/Loss Amount'].round(2).astype(str)
+                display_df['balance'] = '$' + display_df['Balance'].round(2).astype(str)
                 
                 # Display the trades
                 st.dataframe(display_df, use_container_width=True)
@@ -173,15 +167,15 @@ if st.button("Load Data and Run Backtest"):
                 
                 # Equity curve
                 st.write("#### Equity Curve")
-                equity_curve = trades_df[['exit_date', 'balance']].copy()
-                equity_curve = equity_curve.rename(columns={'exit_date': 'Date'})
+                equity_curve = trades_df[['Exit Date', 'Balance']].copy()
+                equity_curve = equity_curve.rename(columns={'Exit Date': 'Date'})
                 equity_curve.set_index('Date', inplace=True)
                 
                 import plotly.graph_objects as go
                 fig_equity = go.Figure()
                 fig_equity.add_trace(go.Scatter(
                     x=equity_curve.index,
-                    y=equity_curve['balance'],
+                    y=equity_curve['Balance'],
                     mode='lines+markers',
                     name='Account Balance'
                 ))
@@ -200,6 +194,6 @@ if st.button("Load Data and Run Backtest"):
 # Add a footer with additional information
 st.markdown("---")
 st.markdown("""
-    **Note:** This is a backtesting system. Past performance is not indicative of future results. 
-    Always use proper risk management when trading real money.
+    **Note:** This is a backtesting system. Past performance may vary with future results. 
+    Trade at your own risk.
 """)
