@@ -62,7 +62,7 @@ def backtest_strategy(df, initial_balance, risk_percentage, stop_loss_percentage
                     trades.append({
                         'Entry Date': entry_date,
                         'Exit Date': current_date,
-                        'Position': 'BUY',
+                        'Position': 'SELL',
                         'Entry Price': entry_price,
                         'Exit Price': exit_price,
                         'Profit/Loss Percentage': profit_loss,
