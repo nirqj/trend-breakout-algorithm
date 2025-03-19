@@ -35,14 +35,14 @@ def backtest_strategy(df, initial_balance, risk_percentage, stop_loss_percentage
                     
                     # Record the trade
                     trades.append({
-                        'entry_date': entry_date,
-                        'exit_date': current_date,
-                        'position': 'BUY',
-                        'entry_price': entry_price,
-                        'exit_price': exit_price,
-                        'profit_loss_percentage': profit_loss,
-                        'profit_loss_amount': profit_loss_amount,
-                        'balance': balance
+                        'Entry Date': entry_date,
+                        'Exit Date': current_date,
+                        'Position': 'BUY',
+                        'Entry Price': entry_price,
+                        'Exit Price': exit_price,
+                        'Profit/Loss Percentage': profit_loss,
+                        'Profit/Loss Amount': profit_loss_amount,
+                        'Balance': balance
                     })
                     
                     # Reset position
@@ -60,14 +60,14 @@ def backtest_strategy(df, initial_balance, risk_percentage, stop_loss_percentage
                     
                     # Record the trade
                     trades.append({
-                        'entry_date': entry_date,
-                        'exit_date': current_date,
-                        'position': 'SELL',
-                        'entry_price': entry_price,
-                        'exit_price': exit_price,
-                        'profit_loss_percentage': profit_loss,
-                        'profit_loss_amount': profit_loss_amount,
-                        'balance': balance
+                        'Entry Date': entry_date,
+                        'Exit Date': current_date,
+                        'Position': 'BUY',
+                        'Entry Price': entry_price,
+                        'Exit Price': exit_price,
+                        'Profit/Loss Percentage': profit_loss,
+                        'Profit/Loss Amount': profit_loss_amount,
+                        'Balance': balance
                     })
                     
                     # Reset position
@@ -111,14 +111,14 @@ def backtest_strategy(df, initial_balance, risk_percentage, stop_loss_percentage
         
         # Record the trade
         trades.append({
-            'entry_date': entry_date,
-            'exit_date': backtest_df.index[-1],
-            'position': 'BUY' if position == 1 else 'SELL',
-            'entry_price': entry_price,
-            'exit_price': exit_price,
-            'profit_loss_percentage': profit_loss,
-            'profit_loss_amount': profit_loss_amount,
-            'balance': balance
+            'Entry Date': entry_date,
+            'Exit Date': backtest_df.index[-1],
+            'Position': 'BUY' if position == 1 else 'SELL',
+            'Entry Price': entry_price,
+            'Exit Price': exit_price,
+            'Profit/Loss Percentage': profit_loss,
+            'Profit/Loss Amount': profit_loss_amount,
+            'Balance': balance
         })
     
     return pd.DataFrame(trades), balance
